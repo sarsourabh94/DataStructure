@@ -1,0 +1,12 @@
+package dll;
+
+public class testing {
+
+	public static void main(String[] args) {
+		SingleLinkList linklist=new SingleLinkList();
+		linklist.append(15);
+		linklist.insertFront(23);
+		linklist.displayList();
+	}
+
+}

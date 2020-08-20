@@ -1,0 +1,11 @@
+package dll;
+
+public class testing {
+
+	public static void main(String[] args) {
+		SingleLinkedList linklist=new SingleLinkedList();
+		linklist.append(15);
+		linklist.displayList();
+	}
+
+}
