@@ -1,0 +1,59 @@
+
+public class BinarySearchTree {
+
+	Node root;
+
+	BinarySearchTree() {
+		root = null;
+	}
+
+	BinarySearchTree(int data) {
+		root = new Node(data);
+	}
+
+	// insert in binary search tree
+	public void insertNode(int num) {
+		
+		if(root==null)
+			return;
+		
+		Node newNode=new Node(num);
+		Node cur=root;
+		Node parent=null;
+		
+		while(true)
+		{
+			parent=cur;
+			
+			if(num<cur.data)
+			{
+				cur=cur.left;
+				if(cur.left==null)
+				{
+					parent.left=newNode;
+					return;
+				}	
+			}
+			else
+			{
+				cur=cur.right;
+				if(cur.right==null)
+				{
+					parent.right=newNode;
+					return;
+				}
+			}
+			
+		}
+	}
+
+	//postorder traversal of tree
+	public void preordertraversal()
+	{
+		
+	}
+	public static void main(String[] args) {
+
+	}
+
+}

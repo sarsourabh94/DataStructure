@@ -1,0 +1,96 @@
+import java.util.Stack;
+
+public class BinarySearchTree {
+
+	Node root;
+
+	BinarySearchTree() {
+		root = null;
+	}
+
+	BinarySearchTree(int data) {
+		root = new Node(data);
+	}
+
+	// insert in binary search tree
+	public void insert(int num) {
+		
+		if(root==null)
+			return;
+		
+		Node newNode=new Node(num);
+		Node cur=root;
+		Node parent=null;
+		
+		while(true)
+		{
+			parent=cur;
+			
+			if(num<cur.data)
+			{
+				cur=cur.left;
+				if(cur==null)
+				{
+					parent.left=newNode;
+					return;
+				}	
+			}
+			else
+			{
+				cur=cur.right;
+				if(cur==null)
+				{
+					parent.right=newNode;
+					return;
+				}
+			}
+			
+		}
+	}
+
+	//delete in bst
+	public void delete(Node root,int num)
+	{
+		if(root==null)
+			return;
+		Node cur=root;
+		
+		if(num<cur.data)
+		{
+			cur.left=delete(cur.left,num);
+		}
+	}
+	
+	//postorder traversal of tree
+	public void preordertraversal()
+	{
+		if(root==null)
+			return;
+		Node cur=root;
+		Stack<Node>s= new Stack<Node>();
+		s.push(cur);
+		while(s.isEmpty()==false)
+		{
+			cur=s.pop();
+			System.out.print(cur.data+ " : ");
+			
+			if(cur.right!=null)
+				s.push(cur.right);
+			if(cur.left!=null)
+				s.push(cur.left);
+		}
+	}
+	public static void main(String[] args) {
+		BinarySearchTree bt = new BinarySearchTree();  
+        //Add nodes to the binary tree  
+        bt.root=new Node(50);  
+        bt.insert(30);  
+        bt.insert(70);  
+        bt.insert(60);  
+        bt.insert(10);  
+        bt.insert(90);
+        
+        bt.preordertraversal();
+	}
+
+}

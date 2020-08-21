@@ -1,0 +1,145 @@
+import java.util.Stack;
+
+public class BinarySearchTree {
+
+	Node root;
+
+	BinarySearchTree() {
+		root = null;
+	}
+
+	BinarySearchTree(int data) {
+		root = new Node(data);
+	}
+
+	// insert in binary search tree
+	public void insert(int num) {
+
+		if (root == null)
+			return;
+
+		Node newNode = new Node(num);
+		Node cur = root;
+		Node parent = null;
+
+		while (true) {
+			parent = cur;
+
+			if (num < cur.data) {
+				cur = cur.left;
+				if (cur == null) {
+					parent.left = newNode;
+					return;
+				}
+			} else {
+				cur = cur.right;
+				if (cur == null) {
+					parent.right = newNode;
+					return;
+				}
+			}
+
+		}
+	}
+
+	// get minimum in bst
+	public Node getmin(Node root) {
+		if (root == null)
+			return null;
+		Node cur = root;
+		while (cur.left != null) {
+			cur = cur.left;
+		}
+		return cur;
+	}
+
+	// get maximum in bst
+	public Node getmax() {
+		if (root == null)
+			return null;
+		Node cur = root;
+		while (cur.right != null) {
+			cur = cur.right;
+		}
+		return cur;
+	}
+
+	// delete in bst
+	public Node delete(Node rootNode, int num) {
+		if (rootNode == null)
+			return null;
+		else {
+			if (num < rootNode.data)
+				rootNode.left = delete(rootNode.left, num);
+
+			else if (num > rootNode.data)
+				rootNode.right = delete(rootNode.right, num);
+
+			else {
+
+				// the node to be deleted has 0 child
+				if (rootNode.left == null && rootNode.right == null)
+					rootNode = null;
+
+				// the node has only left child
+				else if (rootNode.right == null)
+					rootNode = rootNode.left;
+
+				// the node has only right child
+				else if (rootNode.left == null)
+					rootNode = rootNode.right;
+
+				// the node to be deleted has both left and right child
+				else {
+					// get the minimum of the right subtree
+					Node temp = getmin(rootNode.right);
+
+					// replace the data with tempnode data
+					rootNode.data = temp.data;
+
+					// delete the smallest node
+					rootNode.right = delete(rootNode.right, temp.data);
+				}
+			}
+			return rootNode;
+		}
+
+	}
+
+	// postorder traversal of tree
+	public void preordertraversal() {
+		if (root == null)
+			return;
+		Node cur = root;
+		Stack<Node> s = new Stack<Node>();
+		s.push(cur);
+		while (s.isEmpty() == false) {
+			cur = s.pop();
+			System.out.print(cur.data + " : ");
+
+			if (cur.right != null)
+				s.push(cur.right);
+			if (cur.left != null)
+				s.push(cur.left);
+		}
+	}
+
+	public static void main(String[] args) {
+		BinarySearchTree bt = new BinarySearchTree();
+		// Add nodes to the binary tree
+		bt.root = new Node(50);
+		bt.insert(30);
+		bt.insert(70);
+		bt.insert(60);
+		bt.insert(10);
+		bt.insert(90);
+
+		bt.preordertraversal();
+		System.out.println();
+		Node cur,delNode;
+		cur=bt.root;
+		delNode=bt.delete(cur, 30);
+		bt.preordertraversal();
+	}
+
+}

@@ -1,0 +1,136 @@
+import java.util.Stack;
+
+public class BinarySearchTree {
+
+	Node root;
+
+	BinarySearchTree() {
+		root = null;
+	}
+
+	BinarySearchTree(int data) {
+		root = new Node(data);
+	}
+
+	// insert in binary search tree
+	public void insert(int num) {
+
+		if (root == null)
+			return;
+
+		Node newNode = new Node(num);
+		Node cur = root;
+		Node parent = null;
+
+		while (true) {
+			parent = cur;
+
+			if (num < cur.data) {
+				cur = cur.left;
+				if (cur == null) {
+					parent.left = newNode;
+					return;
+				}
+			} else {
+				cur = cur.right;
+				if (cur == null) {
+					parent.right = newNode;
+					return;
+				}
+			}
+
+		}
+	}
+
+	// get minimum in bst
+	public Node getmin(Node root) {
+		if (root == null)
+			return null;
+		Node cur = root;
+		while (cur.left != null) {
+			cur = cur.left;
+		}
+		return cur;
+	}
+
+	// get maximum in bst
+	public int getmax() {
+		if (root == null)
+			return -999;
+		Node cur = root;
+		while (cur.right != null) {
+			cur = cur.right;
+		}
+		return cur.data;
+	}
+
+	// delete in bst
+	public Node delete(Node root,int num)
+	{
+		if(root==null)
+			return null;
+		else {
+			if(num<root.data)
+				root.left=delete(root.left,num);
+			
+			else if(num>root.data)
+				root.right=delete(root.right,num);
+			
+			else {
+				
+				//the node to be deleted has 0 child
+				if(root.left==null && root.right==null)
+					root=null;
+				
+				//the node has only left child
+				else if(root.right==null)
+					root=root.left;
+				
+				//the node has only right child
+				else if(root.left==null)
+					root=root.right;
+				
+				//the node to be deleted has both left and right child
+				else {
+					Node temp=min
+				}
+				return root;
+			}
+			
+		}
+		
+		
+	}
+	
+	// postorder traversal of tree
+	public void preordertraversal() {
+		if (root == null)
+			return;
+		Node cur = root;
+		Stack<Node> s = new Stack<Node>();
+		s.push(cur);
+		while (s.isEmpty() == false) {
+			cur = s.pop();
+			System.out.print(cur.data + " : ");
+
+			if (cur.right != null)
+				s.push(cur.right);
+			if (cur.left != null)
+				s.push(cur.left);
+		}
+	}
+
+	public static void main(String[] args) {
+		BinarySearchTree bt = new BinarySearchTree();
+		// Add nodes to the binary tree
+		bt.root = new Node(50);
+		bt.insert(30);
+		bt.insert(70);
+		bt.insert(60);
+		bt.insert(10);
+		bt.insert(90);
+
+		bt.preordertraversal();
+	}
+
+}
