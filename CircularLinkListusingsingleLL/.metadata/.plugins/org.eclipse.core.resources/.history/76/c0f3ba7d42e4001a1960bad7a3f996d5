@@ -1,0 +1,40 @@
+
+public class CircularLinkList {
+
+	Node last;
+	
+	class Node
+	{
+		int data;
+		Node next;
+		
+		Node(int d)
+		{
+			data=d;
+			next=null;
+		}
+	}
+	
+	//insert in empty list
+	public void addInEmptyList(int data)
+	{
+		if(last!=null)
+			return;
+		Node newNode=new Node(data);
+		last=newNode;
+		last.next=last;
+	}
+	
+	//insert in front
+	public void insertFront(int data)
+	{
+		if(last==null)
+			addInEmptyList(data);
+		
+		Node newNode=new Node(data);
+		
+		last.next=newNode;
+		newNode.next=last.next;
+		
+	}
+}

@@ -1,0 +1,12 @@
+
+public class CircularLinkListMain {
+
+	public static void main(String args[])
+	{
+		CircularLinkList cll = new CircularLinkList();
+		cll.addInEmptyList(10);
+		cll.insertAtLast(20);
+		cll.insertAfterNum(10,15);
+		cll.display();
+	}
+}

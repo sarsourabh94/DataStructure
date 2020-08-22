@@ -1,0 +1,71 @@
+
+public class CircularLinkList {
+
+	Node last;
+	
+	class Node
+	{
+		int data;
+		Node next;
+		
+		Node(int d)
+		{
+			data=d;
+			next=null;
+		}
+	}
+	
+	//insert in empty list
+	public void addInEmptyList(int data)
+	{
+		if(last!=null)
+			return;
+		Node newNode=new Node(data);
+		last=newNode;
+		last.next=last;
+	}
+	
+	//insert in front
+	public void insertFront(int data)
+	{
+		if(last==null)
+			addInEmptyList(data);
+		
+		Node newNode=new Node(data);
+		
+		newNode.next=last.next;
+		last.next=newNode;
+	}
+	
+	//insert at last
+	public void insertAtLast(int data)
+	{
+		if(last==null)
+			addInEmptyList(data);
+		
+		Node newNode=new Node(data);
+		
+		newNode.next=last.next;
+		last.next=newNode;
+		last=newNode;
+	}
+	
+	//insert after a given number
+	public void insertAfterNum(int data, int num)
+	{
+		if(last==null)
+			addInEmptyList(data);
+		Node temp=last.next;
+		
+		do {
+			if(temp.data==num)
+			{
+				Node newNode=new Node(data);
+				newNode.next=temp.next;
+				temp.next=newNode;
+			}
+			temp=temp.next;
+		}while(temp!=last.next)
+		
+	}
+}
